@@ -15,7 +15,7 @@ void show_map();//把地图的状态打印到屏幕上
 
 int main()
 {
-	int sum=0,sum2=0,p=0;
+	int sum=0,sum2=0,p=0,w,q;
 	float bi;
 	system("title 生命游戏");
 	system("color B1");
@@ -23,8 +23,8 @@ int main()
     while(1>0){
 	run();
         show_map();
-		for(int w=0;w<map_size+1;w++)
-			for(int q=0;q<map_size+1;q++)
+		for(w=0;w<map_size+1;w++)
+			for(q=0;q<map_size+1;q++)
 			{
 				if(map[w][q]==type_live)
 				{
