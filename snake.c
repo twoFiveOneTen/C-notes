@@ -3,7 +3,7 @@
 #include <conio.h>
 #include <windows.h>
 
-#define High 20  // ÓÎÏ·»­Ãæ³ß´ç
+#define High 20  //游戏画面尺寸
 #define Width 30
 
 // È«¾Ö±äÁ¿
