@@ -79,9 +79,9 @@ int main()            //主函数
 				i = 0;
 				break;
 			case 3:
-					printf("谢谢使用！再见！");
-					Sleep(1500);
-					k1 = 0;
+				printf("谢谢使用！再见！");
+				Sleep(1500);
+				k1 = 0;
 			default:
 				break;
 		}
