@@ -6,13 +6,12 @@
 #define High 20  //游戏画面尺寸
 #define Width 30
 
-// È«¾Ö±äÁ¿
-int moveDirection; // Ð¡ÉßÒÆ¶¯Î»ÖÃ£¬ÉÏÏÂ×óÓÒ·Ö±ðÓÃ1£¬2£¬3£¬4±íÊ¾
-int food_x,food_y; // Ê³ÎïµÄÎ»ÖÃ
-int canvas[High][Width] = {0}; // ¶þÎ¬Êý×é´æ´¢ÓÎÏ·»­²¼ÖÐ¶ÔÓ¦µÄÔªËØ
-	// 0Îª¿Õ¸ñ0£¬-1Îª±ß¿ò#£¬-2ÎªÊ³ÎïF£¬1ÎªÉßÍ·@£¬´óÓÚ1µÄÕýÊýÎªÉßÉí*
 
-void gotoxy(int x,int y)  //¹â±êÒÆ¶¯µ½(x,y)Î»ÖÃ
+int moveDirection; 
+int food_x,food_y; 
+int canvas[High][Width] = {0};
+
+void gotoxy(int x,int y)  
 {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD pos;
@@ -21,10 +20,7 @@ void gotoxy(int x,int y)  //¹â±êÒÆ¶¯µ½(x,y)Î»ÖÃ
     SetConsoleCursorPosition(handle,pos);
 }
 
-// ÒÆ¶¯Ð¡Éß
-// µÚÒ»²½É¨ÃèÊý×écanvasËùÓÐÔªËØ£¬ÕÒµ½ÕýÊýÔªËØ¶¼+1
-// ÕÒµ½×î´óÔªËØ£¨¼´ÉßÎ²°Í£©£¬°ÑÆä±äÎª0
-// ÕÒµ½=2µÄÔªËØ£¨¼´ÉßÍ·£©£¬ÔÙ¸ù¾ÝÊä³öµÄÉÏÏÂ×óÓÒ·½Ïò£¬°Ñ¶ÔÓ¦µÄÁíÒ»¸öÏñËØÖµÉèÎª1£¨ÐÂÉßÍ·£©
+
 void moveSnakeByDirection()
 {
 	int i,j;
@@ -55,42 +51,40 @@ void moveSnakeByDirection()
 
 	int newHead_i,newHead_j;
 
-	if (moveDirection==1) // ÏòÉÏÒÆ¶¯
+	if (moveDirection==1)
 	{
 		newHead_i = oldHead_i-1;
 		newHead_j = oldHead_j;
 	}
-	if (moveDirection==2) // ÏòÏÂÒÆ¶¯
+	if (moveDirection==2)
 	{
 		newHead_i = oldHead_i+1;
 		newHead_j = oldHead_j;
 	}
-	if (moveDirection==3) // Ïò×óÒÆ¶¯
+	if (moveDirection==3)
 	{
 		newHead_i = oldHead_i;
 		newHead_j = oldHead_j-1;
 	}
-	if (moveDirection==4) // ÏòÓÒÒÆ¶¯
+	if (moveDirection==4)
 	{
 		newHead_i = oldHead_i;
 		newHead_j = oldHead_j+1;
 	}
 
-	// ÐÂÉßÍ·Èç¹û³Ôµ½Ê³Îï
+
 	if (canvas[newHead_i][newHead_j]==-2)
 	{
 		canvas[food_x][food_y] = 0;
-		// ²úÉúÒ»¸öÐÂµÄÊ³Îï
 		food_x = rand()%(High-5) + 2;
 		food_y = rand()%(Width-5) + 2;
 		canvas[food_x][food_y] = -2;
 
-		// Ô­À´µÄ¾ÉÉßÎ²Áô×Å£¬³¤¶È×Ô¶¯+1
+		
 	}
-	else // ·ñÔò£¬Ô­À´µÄ¾ÉÉßÎ²¼õµô£¬±£³Ö³¤¶È²»±ä
+	else 
 		canvas[oldTail_i][oldTail_j] = 0;
 
-	// ÊÇ·ñÐ¡ÉßºÍ×ÔÉí×²£¬»òÕßºÍ±ß¿ò×²£¬ÓÎÏ·Ê§°Ü
 	if (canvas[newHead_i][newHead_j]>0 || canvas[newHead_i][newHead_j]==-1)
 	{
 		printf("ÓÎÏ·Ê§°Ü£¡\n");
@@ -102,11 +96,9 @@ void moveSnakeByDirection()
 		canvas[newHead_i][newHead_j] = 1;
 }
 
-void startup() // Êý¾Ý³õÊ¼»¯
+void startup()
 {
 	int i,j;
-	
-	// ³õÊ¼»¯±ß¿ò
 	for (i=0;i<High;i++)
 	{
 		canvas[i][0] = -1;
@@ -117,14 +109,10 @@ void startup() // Êý¾Ý³õÊ¼»¯
 		canvas[0][j] = -1;
 		canvas[High-1][j] = -1;
 	}
-	
-	// ³õÊ¼»¯ÉßÍ·Î»ÖÃ
 	canvas[High/2][Width/2] = 1;
-	// ³õÊ¼»¯ÉßÉí£¬»­²¼ÖÐÔªËØÖµ·Ö±ðÎª2,3,4,5....
 	for (i=1;i<=4;i++)
 		canvas[High/2][Width/2-i] = i+1;
 
-	// ³õÊ¼Ð¡ÉßÏòÓÒÒÆ¶¯
 	moveDirection = 4;
 	
 	food_x = rand()%(High-5) + 2;
@@ -132,59 +120,59 @@ void startup() // Êý¾Ý³õÊ¼»¯
 	canvas[food_x][food_y] = -2;
 }
 
-void show()  // ÏÔÊ¾»­Ãæ
+void show() 
 {
-	gotoxy(0,0);  // ¹â±êÒÆ¶¯µ½Ô­µãÎ»ÖÃ£¬ÒÔÏÂÖØ»­ÇåÆÁ
+	gotoxy(0,0);
 	int i,j;
 	for (i=0;i<High;i++)
 	{
 		for (j=0;j<Width;j++)
 		{
 			if (canvas[i][j]==0)
-				printf(" ");   //   Êä³ö¿Õ¸ñ
+				printf(" ");
 			else if (canvas[i][j]==-1)
-				printf("#");   //   Êä³ö±ß¿ò#
+				printf("#");
 			else if (canvas[i][j]==1)
-				printf("@");   //   Êä³öÉßÍ·@
+				printf("@");
 			else if (canvas[i][j]>1)
-				printf("*");   //   Êä³öÉßÉí*
+				printf("*");
 			else if (canvas[i][j]==-2)
-				printf("F");   //   Êä³öÊ³ÎïF
+				printf("F");
 		}
 		printf("\n");
 	}
 	Sleep(100);
 }	
 
-void updateWithoutInput()  // ÓëÓÃ»§ÊäÈëÎÞ¹ØµÄ¸üÐÂ
+void updateWithoutInput()
 {
 	moveSnakeByDirection();
 }
 
-void updateWithInput()  // ÓëÓÃ»§ÊäÈëÓÐ¹ØµÄ¸üÐÂ
+void updateWithInput()
 {
 	char input;
-	if(kbhit())  // ÅÐ¶ÏÊÇ·ñÓÐÊäÈë
+	if(kbhit()) 
 	{
-		input = getch();  // ¸ù¾ÝÓÃ»§µÄ²»Í¬ÊäÈëÀ´ÒÆ¶¯£¬²»±ØÊäÈë»Ø³µ
+		input = getch();
 		if (input == 'a') 
 		{
-			moveDirection = 3;   // Î»ÖÃ×óÒÆ
+			moveDirection = 3;
 			moveSnakeByDirection();
 		}
 		else if (input == 'd')
 		{
-			moveDirection = 4;  // Î»ÖÃÓÒÒÆ
+			moveDirection = 4;
 			moveSnakeByDirection();
 		}
 		else if (input == 'w')
 		{
-			moveDirection = 1;  // Î»ÖÃÉÏÒÆ
+			moveDirection = 1;
 			moveSnakeByDirection();
 		}
 		else if (input == 's')
 		{
-			moveDirection = 2;   // Î»ÖÃÏÂÒÆ
+			moveDirection = 2;
 			moveSnakeByDirection();
 		}
 	}
@@ -192,12 +180,12 @@ void updateWithInput()  // ÓëÓÃ»§ÊäÈëÓÐ¹ØµÄ¸üÐÂ
 
 int main()
 {
-	startup();  // Êý¾Ý³õÊ¼»¯	
-	while (1) //  ÓÎÏ·Ñ­»·Ö´ÐÐ
+	startup();	
+	while (1)
 	{
-		show();  // ÏÔÊ¾»­Ãæ
-		updateWithoutInput();  // ÓëÓÃ»§ÊäÈëÎÞ¹ØµÄ¸üÐÂ
-		updateWithInput();  // ÓëÓÃ»§ÊäÈëÓÐ¹ØµÄ¸üÐÂ
+		show();
+		updateWithoutInput();
+		updateWithInput();
 	}
 	return 0;
 }
