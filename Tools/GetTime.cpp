@@ -1,3 +1,5 @@
+//Visual Studio 2012 Express is recommended.
+
 #include <stdio.h> 
 #include <stdlib.h>
 #include <time.h>  
