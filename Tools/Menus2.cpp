@@ -1,3 +1,5 @@
+//Visual Studio 2012 Express is recommended.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -7,7 +9,7 @@ void Line()
 {
 	printf("--------************--------\n");
 }
-char GetInput1()
+char GetInput1()             //the first menu
 {
 	int i = 0;
 	char c;
@@ -31,7 +33,7 @@ char GetInput1()
 	}
 	return c;
 }
-char GetInput2()
+char GetInput2()                  //the second menu
 {
 	int i = 0;
 	char c;
