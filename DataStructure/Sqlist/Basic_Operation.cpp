@@ -1,4 +1,5 @@
-Visual Studio Express 2012 is recommended.
+//Visual Studio Express 2012 is recommended.
+
 #include <stdio.h>
 #include <stdlib.h>
 
