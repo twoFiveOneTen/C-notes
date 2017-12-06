@@ -3,17 +3,74 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define INITSIZE 50
-
 typedef struct BiTree
 {
 	 char data;
 	 struct BiTree *lchild,*rchild;
 }BiTree;
+typedef struct nodd
+{
+	BiTree *t;
+	struct nodd *next;
+}Queuenode;
+
+typedef struct nn
+{
+	Queuenode *front,*rear;
+}Queue;
+
+void InitQueue(Queue &Q)
+{
+	Q.front = (Queuenode *)malloc(sizeof(Queuenode));
+	Q.rear = Q.front;
+	Q.rear->next = NULL;
+}
+
+void InsertQueue(Queue &Q, BiTree *o)
+{
+	if(o)
+	{
+		Queuenode *q;
+		q = (Queuenode *)malloc(sizeof(Queuenode));
+		q->t = o;
+		q->next = NULL;
+		Q.rear->next = q;
+		Q.rear = q;
+	}
+	else return;
+}
+BiTree *DeQueue(Queue &Q)
+{
+	BiTree *m;
+	Queuenode *n;
+	n = Q.front->next;
+	m = Q.front->next->t;
+	if(Q.front->next == Q.rear) Q.front = Q.rear;
+	else Q.front->next = n->next;
+	//free(n);
+	return m;
+	n = NULL;
+}
+
+void DestroyQueue(Queue &Q)              //销毁队列
+{
+	while(Q.front)
+	{
+		Q.rear = Q.front->next;
+		free(Q.front);
+		Q.front = Q.rear;
+	}
+}
+
+int QueueEmpty(Queue &Q)
+{
+	if(Q.front == Q.rear) return 1;
+	else return 0;
+}
 
 typedef struct
 {
 	BiTree *ch;
-	int tag;
 }node;
 
 typedef struct nod
@@ -80,7 +137,7 @@ BiTree *CreateBiTree(BiTree *T)           //创建二叉树
 	return T;
 }
 
-void DestroyBiTree(BiTree *T)            //销毁二叉树
+BiTree *DestroyBiTree(BiTree *T)            //销毁二叉树
 {
 	if(T)
 	{
@@ -89,83 +146,51 @@ void DestroyBiTree(BiTree *T)            //销毁二叉树
 		free(T);
 		T = NULL;
 	}
-}
-void Delete(BiTree *T, char e)           //删除子树
-{
-	Stack S;
-	InitStack(S);
-	BiTree *p,*q;
-	p = T;
-	int a;
-	while(p != NULL || !StackEmpty(S))
-	{
-		while(p)
-		{
-			if(p->data == e)
-			{
-				if(q->lchild == p) a = 0;
-				else a = 1;
-				DestroyBiTree(p->lchild);
-				p->lchild = NULL;
-				DestroyBiTree(p->rchild);
-				p->rchild = NULL;
-				free(p);
-				if(a == 0) q->lchild = NULL;
-				else q->rchild = NULL;
-				p = q;
-			}
-			push(S,p,-1);
-			q = p;
-			p = p->lchild;
-		}//endwhile
-		if(!StackEmpty(S))
-		{
-			p = pop(S);
-			q = p;
-			p = p->rchild;
-		}//endif
-	}//endwhile
-	DestroyStack(S);
+	return T;
 }
 
-void PreOrderTraverse(BiTree *T, void visit(BiTree *q))         //先序遍历
+int Judge(BiTree *T)
 {
-	printf("先序遍历:");
-	Stack S;
-	node a;
-	InitStack(S);
+	int j = 0;
+	Queue Q;
 	BiTree *p;
+	InitQueue(Q);
 	p = T;
-	while(p != NULL || !StackEmpty(S))
+	if(T)
 	{
-		while(p)
+		InsertQueue(Q,p);
+		while(!QueueEmpty(Q))
 		{
-			visit(p);
-			push(S,p,-1);
-			p = p->lchild;
-		}//endwhile
-		if(!StackEmpty(S))
-		{
-			p = pop(S);
-			p = p->rchild;
-		}//endif
-	}//endwhile
-	DestroyStack(S);
-	printf("\n");
-}//PreOrderTraverse
-
+			p = DeQueue(Q);
+			InsertQueue(Q,p->lchild);
+			InsertQueue(Q,p->rchild);
+			if(j != 1)
+			{
+				if(p->lchild == NULL && p->rchild != NULL) return 0;
+				if(p->rchild == NULL) j = 1;
+			}
+			else
+			{
+				if(p->lchild == NULL && p->rchild == NULL) continue;
+				else return 0;
+			}
+		}
+	}
+	DestroyQueue(Q);
+	return 1;
+}
 int main()
 {
-	BiTree *T,*p;
+	BiTree *T;
 	T = NULL;
+	int j;
 	T = CreateBiTree(T);
-	PreOrderTraverse(T,visit);
-	Delete(T,'b');
-	PreOrderTraverse(T,visit);
+	j = Judge(T);
+	if(j == 0) printf("非完全二叉树!\n");
+	else printf("是完全二叉树！\n");
 	system("pause");
 	DestroyBiTree(T);
-	//测试输入：abd##eg#h###c#f##
-	//完全测试输入2:abdh##i##ej##k##cfl##m##gn##o##
-	//测试输入:abdj#l###egh##i###c#bk###
 	return 0;
+	//非完全测试输入：abdj#l###egh##i###c#fk###
+	//完全测试输入2:abdh##i##ej##k##cfl##m##g##
 }
