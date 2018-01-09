@@ -1,4 +1,4 @@
-//VS 2012 is recommended.
+//二叉树先序、中序、后序、层序遍历的非递归算法
 
 #include <stdio.h>
 #include <stdlib.h>
