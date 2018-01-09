@@ -1,4 +1,4 @@
-//VS 2012 is recommended.
+//二叉树的基本操作
 
 #include <stdio.h>
 #include <stdlib.h>
