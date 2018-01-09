@@ -1,4 +1,4 @@
-//VS 2012 is recommended.
+//删除二叉树的某个节点的子树
 
 #include <stdio.h>
 #include <stdlib.h>
