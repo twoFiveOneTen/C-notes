@@ -1,4 +1,4 @@
-//VS 2012 is recommended.
+//用于判断二叉树是否为完全二叉树
 
 #include <stdio.h>
 #include <stdlib.h>
