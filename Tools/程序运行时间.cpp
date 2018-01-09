@@ -5,7 +5,7 @@
 #include <time.h>
 #include <Windows.h>
 
-int main(int argc,char *argv[])
+int main()
 {
 	clock_t e,s = clock();                //Get start time
 	Sleep(1000);
