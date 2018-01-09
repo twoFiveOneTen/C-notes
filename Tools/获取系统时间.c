@@ -1,4 +1,4 @@
-//Visual Studio 2012 Express is recommended.
+//获取系统时间
 
 #include <stdio.h> 
 #include <stdlib.h>
