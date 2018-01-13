@@ -1,5 +1,5 @@
 //哈希函数，文件中存有30个人的信息
-
+//文件是同级目录下的"data.dat"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
