@@ -9,7 +9,6 @@
 （5）购买某一商铺的商品，修改单向链表中商品的信息的销量。
 （6）任何的商铺信息变化，实现文件存储。
 */
-//所需文件在同级目录下，需改名为"file.dat"
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
