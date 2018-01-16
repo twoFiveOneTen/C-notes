@@ -1,3 +1,10 @@
+/*
+å¯¹ä¸€ç¯‡ä¸å°‘äº2000å­—ç¬¦çš„è‹±æ–‡æ–‡ç« ï¼Œç»Ÿè®¡å„å­—ç¬¦å‡ºç°çš„æ¬¡æ•°ï¼Œå®ç°Huffmanç¼–ç ï¼Œä»¥åŠå¯¹ç¼–ç ç»“æœçš„è§£ç ã€‚
+[åŸºæœ¬è¦æ±‚]
+ï¼ˆ1ï¼‰ è¾“å‡ºæ¯ä¸ªå­—ç¬¦å‡ºç°çš„æ¬¡æ•°å’Œç¼–ç ã€‚
+ï¼ˆ2ï¼‰ åœ¨Huffmanç¼–ç åï¼Œè¦å°†ç¼–ç è¡¨å’Œè‹±æ–‡æ–‡ç« ç¼–ç ç»“æœä¿å­˜åˆ°æ–‡ä»¶ä¸­ï¼Œç¼–ç ç»“æœå¿…é¡»æ˜¯äºŒè¿›åˆ¶å½¢å¼ï¼Œå³0 1çš„ä¿¡æ¯ç”¨æ¯”ç‰¹ä½è¡¨ç¤ºï¼Œä¸èƒ½ç”¨å­—ç¬¦â€™0â€™å’Œâ€™1â€™è¡¨ç¤ºã€‚
+ï¼ˆ3ï¼‰ æä¾›è¯»ç¼–ç æ–‡ä»¶ç”ŸæˆåŸæ–‡ä»¶çš„åŠŸèƒ½ã€‚
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -30,8 +37,8 @@ char GetInput1()             //the first menu
 	char c;
 	while(i == 0)
 	{
-		printf("a.Éú³É±àÂë±í     b.±àÂë\n");
-		printf("c.½âÂë\n");
+		printf("a.ç”Ÿæˆç¼–ç è¡¨     b.ç¼–ç \n");
+		printf("c.è§£ç \n");
 		printf("q.Quit");
 		c = getch();
 		if((c < 'a' || c > 'c') && c != 'q')
@@ -93,13 +100,13 @@ void InitSStack(SStack &S)
 	S.top = S.base;
 }
 
-int StackEmpty(Stack S)          //Õ»ÊÇ·ñÎª¿Õ
+int StackEmpty(Stack S)          //æ ˆæ˜¯å¦ä¸ºç©º
 {
 	if(S.top == S.base) return 1;
 	else return 0;
 }
 
-void push(Stack &S, BiTree* p)             //ÈëÕ»
+void push(Stack &S, BiTree* p)             //å…¥æ ˆ
 {
 	S.top->ch = p;
 	++S.top;
@@ -119,7 +126,7 @@ void DestroyStack(Stack &S)
 	S.base = S.top = NULL;
 }
 
-void MakeCode(BiTree* p, SStack &Q)              //´ÓÒ¶×Ó½ÚµãÄæÏòÇó±àÂë
+void MakeCode(BiTree* p, SStack &Q)              //ä»å¶å­èŠ‚ç‚¹é€†å‘æ±‚ç¼–ç 
 {
 	BiTree* q = p->parent;
 	while(q)
@@ -137,7 +144,7 @@ void MakeCode(BiTree* p, SStack &Q)              //´ÓÒ¶×Ó½ÚµãÄæÏòÇó±àÂë
 	}
 }
 
-BiTree *DestroyBiTree(BiTree *T)            //Ïú»Ù¶ş²æÊ÷
+BiTree *DestroyBiTree(BiTree *T)            //é”€æ¯äºŒå‰æ ‘
 {
 	if(T)
 	{
@@ -149,7 +156,7 @@ BiTree *DestroyBiTree(BiTree *T)            //Ïú»Ù¶ş²æÊ÷
 	return T;
 }
 
-void PreOrderTraverse(BiTree* T)         //½øĞĞ¹ş·òÂü±àÂë²¢Ğ´ÈëÎÄ¼ş
+void PreOrderTraverse(BiTree* T)         //è¿›è¡Œå“ˆå¤«æ›¼ç¼–ç å¹¶å†™å…¥æ–‡ä»¶
 {
 	Stack S;
 	SStack Q;
@@ -159,9 +166,9 @@ void PreOrderTraverse(BiTree* T)         //½øĞĞ¹ş·òÂü±àÂë²¢Ğ´ÈëÎÄ¼ş
 	int j = 0, * o;
 	p = T;
 	FILE* fp;
-	fp = fopen("±àÂë±í.dat","wb");
+	fp = fopen("ç¼–ç è¡¨.dat","wb");
 	codedata data;
-	printf(" ×Ö·û   ´ÎÊı      ±àÂë\n");
+	printf(" å­—ç¬¦   æ¬¡æ•°      ç¼–ç \n");
 	printf("----------------------------------\n");
 	while(p != NULL || !StackEmpty(S))
 	{
@@ -170,8 +177,8 @@ void PreOrderTraverse(BiTree* T)         //½øĞĞ¹ş·òÂü±àÂë²¢Ğ´ÈëÎÄ¼ş
 			push(S,p);
 			if(p->lchild == NULL && p->rchild == NULL)
 			{
-				MakeCode(p,Q);     //´ÓÒ¶×Ó½ÚµãÄæÏòÇó±àÂë
-				if(p->ch == '\n') printf("»»ĞĞ    %4d      ",p->weight);
+				MakeCode(p,Q);     //ä»å¶å­èŠ‚ç‚¹é€†å‘æ±‚ç¼–ç 
+				if(p->ch == '\n') printf("æ¢è¡Œ    %4d      ",p->weight);
 				else if(p->ch == TAG);
 				else printf(" [%c]    %4d      ",p->ch,p->weight);
 				o = Q.top;
@@ -186,7 +193,7 @@ void PreOrderTraverse(BiTree* T)         //½øĞĞ¹ş·òÂü±àÂë²¢Ğ´ÈëÎÄ¼ş
 				p->code[j] = '\0';
 //				printf("%4d  ",p->weight);
 				if(p->ch != 15) printf("%s\n",p->code);
-				strcpy(data.code, p->code);		//×ªÒÆ±àÂëÒÔĞ´ÈëÎÄ¼ş
+				strcpy(data.code, p->code);		//è½¬ç§»ç¼–ç ä»¥å†™å…¥æ–‡ä»¶
 				fwrite(&data,sizeof(codedata),1,fp);
 				j = 0;
 				Q.top = Q.base;
@@ -205,7 +212,7 @@ void PreOrderTraverse(BiTree* T)         //½øĞĞ¹ş·òÂü±àÂë²¢Ğ´ÈëÎÄ¼ş
 	DestroyBiTree(T);
 }//
 
-LinkList *InitList(LinkList *L){                     //¹¹Ôì¿ÕµÄ´øÍ·½ÚµãµÄµ¥Á´±í
+LinkList *InitList(LinkList *L){                     //æ„é€ ç©ºçš„å¸¦å¤´èŠ‚ç‚¹çš„å•é“¾è¡¨
 	L = (LinkList *)malloc(sizeof(LinkList));
 	L->data = NULL;
 	L->next = NULL;
@@ -258,7 +265,7 @@ void Merge(LinkList *L)
 	DeleteList(q);
 }
 
-int DestroyList(LinkList *L){                    //Ïú»Ùµ¥Á´±í
+int DestroyList(LinkList *L){                    //é”€æ¯å•é“¾è¡¨
 	LinkList* p;
 	p = L;
 	while(L != NULL){
@@ -270,7 +277,7 @@ int DestroyList(LinkList *L){                    //Ïú»Ùµ¥Á´±í
 	return 1;
 }
 
-int CreateRoot(LinkList* L, int w[Length])            //´´½¨¶à¸öµ¥½Úµã¶ş²æÊ÷
+int CreateRoot(LinkList* L, int w[Length])            //åˆ›å»ºå¤šä¸ªå•èŠ‚ç‚¹äºŒå‰æ ‘
 {
 	int i,num = 0;
 	LinkList* p,* q;
@@ -295,7 +302,7 @@ int CreateRoot(LinkList* L, int w[Length])            //´´½¨¶à¸öµ¥½Úµã¶ş²æÊ÷
 
 void ShowList(LinkList* L)
 {
-	printf("¶ş²æÊ÷¼¯ºÏÎª:");
+	printf("äºŒå‰æ ‘é›†åˆä¸º:");
 	LinkList* p = L->next;
 	while(p != NULL)
 	{
@@ -338,7 +345,7 @@ void Coding(LinkList* L)
 	FILE* fp;
 	if((fp = fopen("file.txt","r")) == NULL)
 	{
-		printf("ÎÄ¼ş´ò¿ªÊ§°Ü");
+		printf("æ–‡ä»¶æ‰“å¼€å¤±è´¥");
 		return;
 	}
 	int Library[Length],num,i;
@@ -359,11 +366,11 @@ void Coding(LinkList* L)
 	fclose(fp);
 }
 //1111110111001000
-void Codefile()		//±àÂë
+void Codefile()		//ç¼–ç 
 {
 	FILE* fp,* fq;
 	int num;
-	fp = fopen("±àÂë±í.dat","rb");
+	fp = fopen("ç¼–ç è¡¨.dat","rb");
 	codedata data[Length],temp;
 	fread(&temp,sizeof(codedata),1,fp);
 	while(!feof(fp))
@@ -374,7 +381,7 @@ void Codefile()		//±àÂë
 		fread(&temp,sizeof(codedata),1,fp);
 	}
 	fclose(fp);
-	fq = fopen("±àÂë½á¹û.dat","wb");
+	fq = fopen("ç¼–ç ç»“æœ.dat","wb");
 	fp = fopen("file.txt","r");
 	char ch;
 	int n, i, j = 0;
@@ -432,7 +439,7 @@ void Codefile()		//±àÂë
 		fwrite((char *)&buffer, sizeof(buffer), 1, fq);
 	fclose(fp);
 	fclose(fq);
-	printf("       ±àÂë½áÊø!!!\n\n\n");
+	printf("       ç¼–ç ç»“æŸ!!!\n\n\n");
 } 
 
 char Find(BiTree* T, char code[])
@@ -451,7 +458,7 @@ char Find(BiTree* T, char code[])
 	return 0;
 }
 
-void Decoding()		//½âÂë
+void Decoding()		//è§£ç 
 {
 	BiTree* T,* p,* q;
 	T = (BiTree *)malloc(sizeof(BiTree));
@@ -463,13 +470,13 @@ void Decoding()		//½âÂë
 	FILE* fp,* fq;
 	codedata data;
 	int i = 0;
-	fp = fopen("±àÂë±í.dat","rb");		//¶ÁÈ¡±àÂë±íÎÄ¼ş
+	fp = fopen("ç¼–ç è¡¨.dat","rb");		//è¯»å–ç¼–ç è¡¨æ–‡ä»¶
 	fread(&data,sizeof(codedata),1,fp);
-	while(!feof(fp))		//¸ù¾İ±àÂë±íÉú³É¹ş·òÂüÊ÷
+	while(!feof(fp))		//æ ¹æ®ç¼–ç è¡¨ç”Ÿæˆå“ˆå¤«æ›¼æ ‘
 	{
 		while(data.code[i])
 		{
-			if(data.code[i] == '0')		//Èç¹û±àÂëÎª0£¬ÔòÏò×ó½øĞĞ
+			if(data.code[i] == '0')		//å¦‚æœç¼–ç ä¸º0ï¼Œåˆ™å‘å·¦è¿›è¡Œ
 			{
 				p = q->lchild;
 				if(p == NULL)
@@ -483,7 +490,7 @@ void Decoding()		//½âÂë
 				}
 				else q = p;
 			}
-			else		//Èç¹û±àÂëÎª1£¬ÔòÏòÓÒ½øĞĞ
+			else		//å¦‚æœç¼–ç ä¸º1ï¼Œåˆ™å‘å³è¿›è¡Œ
 			{
 				p = q->rchild;
 				if(p == NULL)
@@ -506,8 +513,8 @@ void Decoding()		//½âÂë
 	}
 	fclose(fp);
 	char ch, code[18];
-	fp = fopen("±àÂë½á¹û.dat","rb");
-	fq = fopen("½âÂë½á¹û.txt","w");
+	fp = fopen("ç¼–ç ç»“æœ.dat","rb");
+	fq = fopen("è§£ç ç»“æœ.txt","w");
 	unsigned char buffer = 0x00, get = 0x00;
 	fread(&buffer,sizeof(buffer), 1, fp);
 	i = 0;
@@ -562,7 +569,7 @@ int main()
 		{
 		case 'a':
 			Coding(L);
-			printf("      ±àÂë±íĞÎ³ÉÍê³É!!!\n\n\n");
+			printf("      ç¼–ç è¡¨å½¢æˆå®Œæˆ!!!\n\n\n");
 			Line();
 			break;
 		case 'b': 
@@ -572,7 +579,7 @@ int main()
 		case 'c':
 			Decoding();
 			Line();
-			printf("      ½âÂëÍê³É!!!   \n\n");
+			printf("      è§£ç å®Œæˆ!!!   \n\n");
 			Line();
 			break;
 		case 'q':
