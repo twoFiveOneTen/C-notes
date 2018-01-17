@@ -15,7 +15,7 @@ LinkList *InitList(LinkList *L){
 	return L;
 	printf("%d\n",L->data);
 }
-void ListInsert(LinkList *L,int e){
+void ListInsert(LinkList *L, int e){
 	LinkList *p,*q;
 	q = L;
 	p = L->next;
@@ -45,7 +45,7 @@ void ListInsert(LinkList *L,int e){
 }
 
 int ListDelete(LinkList *L){
-	LinkList *p,*q;
+	LinkList *p, *q;
 	int e;
 	p = L->next;
 	q = L;
@@ -101,7 +101,7 @@ void Sort(LinkList *L){
 	printf("排序完成\n");
 }
 int main(){
-	LinkList *L = NULL,*p,*q;
+	LinkList *L = NULL, *p, *q;
 	L = InitList(L);
 	int i;
 	L->data = rand()%40;
