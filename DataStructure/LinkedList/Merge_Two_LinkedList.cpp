@@ -1,4 +1,5 @@
 //推荐使用VS 2012
+//用来将两个正序链表合并成一个正序链表，重复元素略去
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,8 +26,8 @@ void ShowList(LinkList *L){
 	printf("\n");
 }
 
-void ListInsert(LinkList *L,int e){
-	LinkList *p,*q;
+void ListInsert(LinkList *L, int e){
+	LinkList *p, *q;
 	q = L;
 	p = q->next;
 	LinkList *r;
@@ -51,7 +52,7 @@ void ListInsert(LinkList *L,int e){
 	q->next = r;
 }
 
-int Judge(LinkList *A,int e){
+int Judge(LinkList *A, int e){
 	LinkList *p;
 	p = A;
 	while(p != NULL){
@@ -60,7 +61,7 @@ int Judge(LinkList *A,int e){
 	}
 	return 0;
 }
-LinkList *Merge(LinkList *A,LinkList *B){
+LinkList *Merge(LinkList *A, LinkList *B){
 	LinkList *p;
 	p = B;
 	while(p != NULL){
@@ -74,12 +75,12 @@ LinkList *Merge(LinkList *A,LinkList *B){
 }
 
 int main(){
-	LinkList *A = NULL,*B = NULL,*p,*q;
+	LinkList *A = NULL, *B = NULL, *p, *q;
 	A = InitList(A);
-	int i,j;
-	A->data = 0;;
+	int i, j;
+	A->data = 0;
 	q = A;
-	for(i = 1;i < 11;i++){
+	for(i = 1; i < 11; ++i){
 		p = (LinkList *)malloc(sizeof(LinkList));
 		p->data = 5 * i;
 		p->next = NULL;
@@ -87,9 +88,9 @@ int main(){
 		q = p;
 	}
 	B = InitList(B);
-	B->data = 0;;
+	B->data = 0;
 	q = B;
-	for(j = 1;j < 10;j++){
+	for(j = 1; j < 10; ++j){
 		p = (LinkList *)malloc(sizeof(LinkList));
 		p->data = 3 * j;
 		p->next = NULL;
@@ -98,7 +99,7 @@ int main(){
 	}
 	ShowList(A);
 	ShowList(B);
-	LinkList *C = Merge(A,B);
+	LinkList *C = Merge(A, B);
 	ShowList(C);
 	system("pause");
 	return 0;
