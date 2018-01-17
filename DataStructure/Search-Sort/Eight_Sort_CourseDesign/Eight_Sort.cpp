@@ -1,3 +1,9 @@
+/*
+åˆ©ç”¨éšæœºå‡½æ•°äº§ç”Ÿ10ä¸ªæ ·æœ¬çš„20000ä¸ªéšæœºæ•´æ•°ï¼ˆå…¶ä¸­ä¹‹ä¸€å·²ç»æ˜¯æ­£åºï¼Œä¹‹ä¸€æ˜¯é€†åºï¼‰ï¼Œåˆ©ç”¨ç›´æ¥æ’å…¥æ’åºã€å¸Œå°”æ’åºï¼Œå†’æ³¡æ’åºã€å¿«é€Ÿæ’åºã€é€‰æ‹©æ’åºã€å †æ’åºï¼Œå½’å¹¶æ’åºã€åŸºæ•°æ’åº8ç§æ’åºæ–¹æ³•è¿›è¡Œæ’åºï¼ˆç»“æœä¸ºç”±å°åˆ°å¤§çš„é¡ºåºï¼‰ï¼Œå¹¶ç»Ÿè®¡æ¯ä¸€ç§æ’åºç®—æ³•å¯¹ä¸åŒæ ·æœ¬æ‰€è€—è´¹çš„æ—¶é—´ã€‚
+[åŸºæœ¬è¦æ±‚] 
+ï¼ˆ1ï¼‰ åŸå§‹æ•°æ®å­˜åœ¨æ–‡ä»¶ä¸­ï¼Œç”¨ç›¸åŒæ ·æœ¬å¯¹ä¸åŒç®—æ³•è¿›è¡Œæµ‹è¯•ï¼›
+ï¼ˆ2ï¼‰ å±å¹•æ˜¾ç¤ºæ¯ç§æ’åºç®—æ³•å¯¹ä¸åŒæ ·æœ¬æ‰€èŠ±çš„æ—¶é—´ï¼›
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -26,24 +32,24 @@ typedef struct node
 	int data5[20000];
 	int data6[20000];
 	int data7[20000];
-	int data8[20000];		//Êı×é1µ½8ÎªÎŞĞò²»Í¬Êı×é
-	int data9[20000];		//Êı×é9ÎªÕıĞòÊı×é
-	int data10[20000];		//Êı×é10ÎªÄæĞòÊı×é
+	int data8[20000];		//æ•°ç»„1åˆ°8ä¸ºæ— åºä¸åŒæ•°ç»„
+	int data9[20000];		//æ•°ç»„9ä¸ºæ­£åºæ•°ç»„
+	int data10[20000];		//æ•°ç»„10ä¸ºé€†åºæ•°ç»„
 }DATA;
 
-void GetFile(DATA &Data)		//¶ÁÈ¡ÎÄ¼ş
+void GetFile(DATA &Data)		//è¯»å–æ–‡ä»¶
 {
 	FILE* fp;
 	fp = fopen("data.dat","rb");
 	fread(&Data,sizeof(DATA),1,fp);
 	fclose(fp);
 }
-//Ã°ÅİÅÅĞò
-void BubbleSort(int data[])		//Ã°ÅİÅÅĞò
+//å†’æ³¡æ’åº
+void BubbleSort(int data[])		//å†’æ³¡æ’åº
 {
 	clock_t start, finish;
     double duration;
-	start = clock();	//¿ªÊ¼¼ÆÊ±
+	start = clock();	//å¼€å§‹è®¡æ—¶
 	int i,j,temp;
 	for(i = 0; i < Length - 1; ++i)
 		for(j = 0; j < Length - 1; ++j)
@@ -54,18 +60,18 @@ void BubbleSort(int data[])		//Ã°ÅİÅÅĞò
 				data[j+1] = temp;
 			}
 			else continue;
-	finish = clock();		//½áÊø¼ÆÊ±
+	finish = clock();		//ç»“æŸè®¡æ—¶
 	duration = double(finish - start);
 	printf("%8.1f",duration);
 }
-//¶ÑÅÅĞò
-void HeapAdjust(int data[], int s, int m)		//¶ÑÅÅĞò
+//å †æ’åº
+void HeapAdjust(int data[], int s, int m)		//å †æ’åº
 {
-	int rc = data[s-1];          //rcÔİ´ædata[s]
+	int rc = data[s-1];          //rcæš‚å­˜data[s]
 	int j;
 	for(j = 2 * s; j<=m; j *= 2)
 	{
-		if(j < m && data[j-1] < data[j]) ++j;        //jÊÇ×î´óÖµµÄ½Ç±ê
+		if(j < m && data[j-1] < data[j]) ++j;        //jæ˜¯æœ€å¤§å€¼çš„è§’æ ‡
 		if(rc >= data[j-1]) break;
 		data[s-1] = data[j-1];
 		s = j;
@@ -73,15 +79,15 @@ void HeapAdjust(int data[], int s, int m)		//¶ÑÅÅĞò
 	data[s-1] = rc;
 }
 
-void HeapSort(int data[])		//¶ÑÅÅĞò
+void HeapSort(int data[])		//å †æ’åº
 {  
     clock_t start, finish;
     double duration;
-	start = clock();	//¿ªÊ¼¼ÆÊ±
+	start = clock();	//å¼€å§‹è®¡æ—¶
 	int i,temp;
-	for(i = Length/2; i>0; --i)          //°ËÎŞĞò¶Ñ½¨³ÉĞ¡¶¥¶Ñ
+	for(i = Length/2; i>0; --i)          //å…«æ— åºå †å»ºæˆå°é¡¶å †
 		HeapAdjust(data,i,Length);
-	for(i = Length; i > 0; --i)           //ĞÎ³É´Ó´óµ½Ğ¡Êı×é
+	for(i = Length; i > 0; --i)           //å½¢æˆä»å¤§åˆ°å°æ•°ç»„
 	{
 		temp = data[i-1];
 		data[i-1] = data[0];
@@ -92,12 +98,12 @@ void HeapSort(int data[])		//¶ÑÅÅĞò
 	duration = double(finish - start);
 	printf("%8.1f",duration);
 }
-//²åÈëÅÅĞò
-void InsertSort(int data[])		//²åÈëÅÅĞò
+//æ’å…¥æ’åº
+void InsertSort(int data[])		//æ’å…¥æ’åº
 {
 	clock_t start, finish;
     double duration;
-	start = clock();	//¿ªÊ¼¼ÆÊ±
+	start = clock();	//å¼€å§‹è®¡æ—¶
 	int i,j,temp;
 	for(i = 1; i < Length; ++i)
 	{
@@ -108,18 +114,18 @@ void InsertSort(int data[])		//²åÈëÅÅĞò
 			data[i] = data[j];
 			while(data[j-1] > temp && j != 0)
 			{
-				data[j] = data[j-1];		//ÏòÇ°ÒÆ¶¯
+				data[j] = data[j-1];		//å‘å‰ç§»åŠ¨
 				--j;
 			}
-			data[j] = temp;		//²åÈë
+			data[j] = temp;		//æ’å…¥
 		}
 	}
 	finish = clock();
 	duration = double(finish - start);
 	printf("%8.1f",duration);
 }
-//Ñ¡ÔñÅÅĞò
-int SelectMin(int data[], int i)		//ÕÒ³ö×îĞ¡ÊıµÄ½Ç±ê
+//é€‰æ‹©æ’åº
+int SelectMin(int data[], int i)		//æ‰¾å‡ºæœ€å°æ•°çš„è§’æ ‡
 {
 	int temp = data[i], j = i;
 	for(i = i + 1; i < Length; ++i)
@@ -134,11 +140,11 @@ int SelectMin(int data[], int i)		//ÕÒ³ö×îĞ¡ÊıµÄ½Ç±ê
 	return j;
 }
 
-void SelectSort(int data[])           //Ñ¡ÔñÅÅĞò
+void SelectSort(int data[])           //é€‰æ‹©æ’åº
 {
 	clock_t start, finish;
     double duration;
-	start = clock();	//¿ªÊ¼¼ÆÊ±
+	start = clock();	//å¼€å§‹è®¡æ—¶
 	int i,j,temp;
 	for(i = 0; i < Length; ++i)
 	{
@@ -154,7 +160,7 @@ void SelectSort(int data[])           //Ñ¡ÔñÅÅĞò
 	duration = double(finish - start);
 	printf("%8.1f",duration);
 }
-//¹é²¢ÅÅĞò
+//å½’å¹¶æ’åº
 void Merge(int data[], int i, int m, int n)
 {
 	int j,k,l,a = i,b = n,t[Length];
@@ -174,38 +180,38 @@ void Merge(int data[], int i, int m, int n)
 			t[k++] = data[j++];
 	}
 	for(l = a; l <= b; ++l)
-		data[l] = t[l];          //½«²¿·ÖÅÅĞò½á¹û´«»ØÈ¥
+		data[l] = t[l];          //å°†éƒ¨åˆ†æ’åºç»“æœä¼ å›å»
 }
 
 void MergingSort(int data[])
 {
 	clock_t start, finish;
     double duration;
-	start = clock();	//¿ªÊ¼¼ÆÊ±
+	start = clock();	//å¼€å§‹è®¡æ—¶
 	int l,num,c;
 	num = (int)(log10((float)Length)/log10((float)2) + 1);
 	for(l = 1; l <= num; ++l)
 	{
 		for(c = 0; c < Length; c = c + (int)pow((float)2,l))
 		{
-			if(c + (int)pow((float)2,l-1) >= Length) break;       //Èç¹ûÇ°ÃæÒ»°ë¶¼²»¹»
+			if(c + (int)pow((float)2,l-1) >= Length) break;       //å¦‚æœå‰é¢ä¸€åŠéƒ½ä¸å¤Ÿ
 			else if(c + (int)pow((float)2,l) >= Length)
-					Merge(data,c,c + (int)pow((float)2,l-1) - 1,Length - 1);   //Ç°ÃæÖ»¹»Ò»°ë³¤
+					Merge(data,c,c + (int)pow((float)2,l-1) - 1,Length - 1);   //å‰é¢åªå¤Ÿä¸€åŠé•¿
 				else
-					Merge(data,c,c+(int)pow((float)2,l - 1) - 1,c+(int)pow((float)2,l) - 1);     //Ç°Ãæ×ã¹»³¤
+					Merge(data,c,c+(int)pow((float)2,l - 1) - 1,c+(int)pow((float)2,l) - 1);     //å‰é¢è¶³å¤Ÿé•¿
 		}
 		
 	}
-	finish = clock();		//½áÊø¼ÆÊ±
+	finish = clock();		//ç»“æŸè®¡æ—¶
 	duration = double(finish - start);
 	printf("%8.1f",duration);
 }
-//¿ìËÙÅÅĞò
-void Partition(int data[], int l, int h)         //¿ìËÙÅÅĞò
+//å¿«é€Ÿæ’åº
+void Partition(int data[], int l, int h)         //å¿«é€Ÿæ’åº
 {
 	int temp,low = l, high = h;
 	int pivotkey = data[low]; 
-	while(low < high)         //Ò»´Î¿ìÅÅ
+	while(low < high)         //ä¸€æ¬¡å¿«æ’
 	{
 		while(low < high && data[high] >= pivotkey) --high;
 		temp = data[low];
@@ -216,7 +222,7 @@ void Partition(int data[], int l, int h)         //¿ìËÙÅÅĞò
 		data[low] = data[high];
 		data[high] = temp;
 	}
-	if(low- 1 > l)           //µİ¹éË¼Ïë
+	if(low- 1 > l)           //é€’å½’æ€æƒ³
 		Partition(data,l,low - 1);
 	if(low + 1 < h)
 		Partition(data,low + 1,h);
@@ -226,13 +232,13 @@ void PartitionTime(int data[])
 {
 	clock_t start, finish;
     double duration;
-	start = clock();	//¿ªÊ¼¼ÆÊ±
+	start = clock();	//å¼€å§‹è®¡æ—¶
 	Partition(data,0,Length-1);
-	finish = clock();		//½áÊø¼ÆÊ±
+	finish = clock();		//ç»“æŸè®¡æ—¶
 	duration = double(finish - start);
 	printf("%8.1f",duration);
 }
-//Ï£¶ûÅÅĞò
+//å¸Œå°”æ’åº
 void ShellInsert(int data[], int dk)
 {
 	int i, j, temp;
@@ -244,10 +250,10 @@ void ShellInsert(int data[], int dk)
 			data[i] = data[j];
 			while(data[j-dk] > temp && j != 0)
 			{
-				data[j] = data[j-dk];		//ÏòÇ°ÒÆ¶¯
+				data[j] = data[j-dk];		//å‘å‰ç§»åŠ¨
 				j -= dk;
 			}
-			data[j] = temp;		//²åÈë
+			data[j] = temp;		//æ’å…¥
 		}
 }
 
@@ -255,17 +261,17 @@ void ShellSort(int data[])
 {
 	clock_t start, finish;
     double duration;
-	start = clock();	//¿ªÊ¼¼ÆÊ±
+	start = clock();	//å¼€å§‹è®¡æ—¶
 	int dlta[5], t = 5, i;
 	for(i = 0; i < t; ++i)
 		dlta[i] = 2 * i + 1;
 	for(i = 0; i < t; ++i)
 		ShellInsert(data, dlta[i]);
-	finish = clock();		//½áÊø¼ÆÊ±
+	finish = clock();		//ç»“æŸè®¡æ—¶
 	duration = double(finish - start);
 	printf("%8.1f",duration);
 }
-//»ùÊıÅÅĞò
+//åŸºæ•°æ’åº
 void InitTempTo(TempTo &T)
 {
 	int i;
@@ -290,7 +296,7 @@ int Len(Temp* L)
 	return i;
 }
 
-void Destroy(Temp* L)		//Ïú»Ù»ùÊıÅÅĞò²úÉúµÄÁ´±í
+void Destroy(Temp* L)		//é”€æ¯åŸºæ•°æ’åºäº§ç”Ÿçš„é“¾è¡¨
 {
 	Temp* p,* q;
 	p = L->next;
@@ -304,7 +310,7 @@ void Destroy(Temp* L)		//Ïú»Ù»ùÊıÅÅĞò²úÉúµÄÁ´±í
 	L = NULL;
 }
 
-void RadixSort(int data[])		//»ùÊıÅÅĞò
+void RadixSort(int data[])		//åŸºæ•°æ’åº
 {
 	Temp* L,* p,* q,* r;
 	TempTo T;
@@ -314,7 +320,7 @@ void RadixSort(int data[])		//»ùÊıÅÅĞò
 	L->num = -1;
 	L->next = NULL;
 	q = L;
-	for(i = 0; i < Length; ++i)		//°ÑÊı×é×ªÎªÁ´±í
+	for(i = 0; i < Length; ++i)		//æŠŠæ•°ç»„è½¬ä¸ºé“¾è¡¨
 	{
 		p = (Temp *)malloc(sizeof(Temp));
 		p->num = data[i];
@@ -324,27 +330,27 @@ void RadixSort(int data[])		//»ùÊıÅÅĞò
 	}
 	clock_t start, finish;
     double duration;
-	start = clock();		//¿ªÊ¼¼ÆÊ±
+	start = clock();		//å¼€å§‹è®¡æ—¶
 	for(i = 0, j = 1; i <= 5; ++i)
 	{
 		p = L->next;
 		j *= 10;
-		while(p)		//¸ù¾İÊıÎ»·Ö³ÉÈô¸É¶Î
+		while(p)		//æ ¹æ®æ•°ä½åˆ†æˆè‹¥å¹²æ®µ
 		{
 			k = p->num%j;
-			k = k / (j / 10);		//»ñÈ¡ÌØ¶¨Î»ÊıÉÏµÄÊı×Ö
+			k = k / (j / 10);		//è·å–ç‰¹å®šä½æ•°ä¸Šçš„æ•°å­—
 			T.f[k]->next = p;
 			T.f[k] = p;
-			++T.r[k]->num;		//ĞòÁĞ½áµãÊı×ÔÔö
+			++T.r[k]->num;		//åºåˆ—ç»“ç‚¹æ•°è‡ªå¢
 			p = p->next;
 			T.f[k]->next = NULL;
 		}
 		r = L;
 		for(l = 0; l < 10; ++l)
 		{
-			if(T.r[l]->num != 0)		//Èç¹û´Ë×ÓĞòÁĞ½áµãÊı²»Îª¿Õ
+			if(T.r[l]->num != 0)		//å¦‚æœæ­¤å­åºåˆ—ç»“ç‚¹æ•°ä¸ä¸ºç©º
 			{
-				r->next = T.r[l]->next;		//°Ñ·Ç¿Õ×ÓĞòÁĞÁ¬½ÓÔÚÒ»Æğ
+				r->next = T.r[l]->next;		//æŠŠéç©ºå­åºåˆ—è¿æ¥åœ¨ä¸€èµ·
 				r = T.f[l];
 				T.r[l]->num = 0;
 				T.r[l]->next = NULL;
@@ -353,20 +359,20 @@ void RadixSort(int data[])		//»ùÊıÅÅĞò
 			else continue;
 		}
 	}
-	finish = clock();		//½áÊø¼ÆÊ±
+	finish = clock();		//ç»“æŸè®¡æ—¶
 	duration = double(finish - start);
 	printf("%8.1f",duration);
 	p = L->next;
-	for(i = 0; i < Length; ++i)		//°ÑÁ´±í×ª»ØÊı×é
+	for(i = 0; i < Length; ++i)		//æŠŠé“¾è¡¨è½¬å›æ•°ç»„
 	{
 		data[i] = p->num;
 		p = p->next;
 	}
 }
-//Êä³ö¸÷ÅÅĞòÊ±¼ä
+//è¾“å‡ºå„æ’åºæ—¶é—´
 void BubbleSortPrint(DATA &Data)
 {
-	printf("Ã°ÅİÅÅĞò");
+	printf("å†’æ³¡æ’åº");
 	BubbleSort(Data.data1);
 	BubbleSort(Data.data2);
 	BubbleSort(Data.data3);
@@ -382,7 +388,7 @@ void BubbleSortPrint(DATA &Data)
 
 void HeapSortPrint(DATA &Data)
 {
-	printf(" ¶ÑÅÅĞò ");
+	printf(" å †æ’åº ");
 	HeapSort(Data.data1);
 	HeapSort(Data.data2);
 	HeapSort(Data.data3);
@@ -398,7 +404,7 @@ void HeapSortPrint(DATA &Data)
 
 void InsertSortPrint(DATA &Data)
 {
-	printf("²åÈëÅÅĞò");
+	printf("æ’å…¥æ’åº");
 	InsertSort(Data.data1);
 	InsertSort(Data.data2);
 	InsertSort(Data.data3);
@@ -414,7 +420,7 @@ void InsertSortPrint(DATA &Data)
 
 void SelectSortPrint(DATA &Data)
 {
-	printf("Ñ¡ÔñÅÅĞò");
+	printf("é€‰æ‹©æ’åº");
 	SelectSort(Data.data1);
 	SelectSort(Data.data2);
 	SelectSort(Data.data3);
@@ -430,7 +436,7 @@ void SelectSortPrint(DATA &Data)
 
 void MergingSortPrint(DATA &Data)
 {
-	printf("¹é²¢ÅÅĞò");
+	printf("å½’å¹¶æ’åº");
 	MergingSort(Data.data1);
 	MergingSort(Data.data2);
 	MergingSort(Data.data3);
@@ -446,7 +452,7 @@ void MergingSortPrint(DATA &Data)
 
 void PartitionPrint(DATA &Data)
 {
-	printf("¿ìËÙÅÅĞò");
+	printf("å¿«é€Ÿæ’åº");
 	PartitionTime(Data.data1);
 	PartitionTime(Data.data2);
 	PartitionTime(Data.data3);
@@ -463,7 +469,7 @@ void PartitionPrint(DATA &Data)
 
 void ShellSortPrint(DATA &Data)
 {
-	printf("Ï£¶ûÅÅĞò");
+	printf("å¸Œå°”æ’åº");
 	ShellSort(Data.data1);
 	ShellSort(Data.data2);
 	ShellSort(Data.data3);
@@ -477,9 +483,9 @@ void ShellSortPrint(DATA &Data)
 	printf("\n");
 }
 
-void RadixSortPrint(DATA &Data)		//»ùÊıÅÅĞò
+void RadixSortPrint(DATA &Data)		//åŸºæ•°æ’åº
 {
-	printf("»ùÊıÅÅĞò");
+	printf("åŸºæ•°æ’åº");
 	RadixSort(Data.data1);
 	RadixSort(Data.data2);
 	RadixSort(Data.data3);
@@ -492,27 +498,27 @@ void RadixSortPrint(DATA &Data)		//»ùÊıÅÅĞò
 	RadixSort(Data.data10);
 	printf("\n");
 }
-//Ö÷º¯Êı
+//ä¸»å‡½æ•°
 int main()
 {
 	DATA Data;
 	GetFile(Data);
 	printf("******************************************************************************************\n");
-	printf("                                                                            µ¥Î»£ºms\n");
-	printf("ÅÅĞò·½Ê½  Êı×éÒ»  Êı×é¶ş  Êı×éÈı  Êı×éËÄ  Êı×éÎå  Êı×éÁù  Êı×éÆß  Êı×é°Ë ÕıĞòÊı×é ÄæĞòÊı×é \n");
-	BubbleSortPrint(Data);		//Ã°ÅİÅÅĞò
+	printf("                                                                            å•ä½ï¼šms\n");
+	printf("æ’åºæ–¹å¼  æ•°ç»„ä¸€  æ•°ç»„äºŒ  æ•°ç»„ä¸‰  æ•°ç»„å››  æ•°ç»„äº”  æ•°ç»„å…­  æ•°ç»„ä¸ƒ  æ•°ç»„å…« æ­£åºæ•°ç»„ é€†åºæ•°ç»„ \n");
+	BubbleSortPrint(Data);		//å†’æ³¡æ’åº
 	GetFile(Data);
-	HeapSortPrint(Data);		//¶ÑÅÅĞò
+	HeapSortPrint(Data);		//å †æ’åº
 	GetFile(Data);
-	SelectSortPrint(Data);		//Ñ¡ÔñÅÅĞò
+	SelectSortPrint(Data);		//é€‰æ‹©æ’åº
 	GetFile(Data);
-	MergingSortPrint(Data);		//¹é²¢ÅÅĞò
+	MergingSortPrint(Data);		//å½’å¹¶æ’åº
 	GetFile(Data);
-	ShellSortPrint(Data);		//Ï£¶ûÅÅĞò
+	ShellSortPrint(Data);		//å¸Œå°”æ’åº
 	GetFile(Data);
-	PartitionPrint(Data);		//¿ìËÙÅÅĞò
+	PartitionPrint(Data);		//å¿«é€Ÿæ’åº
 	GetFile(Data);
-	InsertSortPrint(Data);		//²åÈëÅÅĞò
+	InsertSortPrint(Data);		//æ’å…¥æ’åº
 	GetFile(Data);
 	RadixSortPrint(Data);
 	system("pause");
