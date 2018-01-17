@@ -42,7 +42,7 @@ int DestroyList(LinkList L){                    //销毁单链表
 }
 
 void ClearList(LinkList &L){                       //清空单链表
-	LinkList p,q;
+	LinkList p, q;
 	p = L->next;
 	while(p != NULL){
 		q = p;
@@ -75,7 +75,7 @@ int ListLength(LinkList L){          //查看单链表长度
 	return i;
 }
 
-ElemType GetElem(LinkList L,int i,ElemType &e){               //返回某个元素
+ElemType GetElem(LinkList L, int i, ElemType &e){               //返回某个元素
 	if(i < 1||i > ListLength(L)){
 		printf("查找序号有误\n");
 		exit(0);
@@ -91,7 +91,7 @@ ElemType GetElem(LinkList L,int i,ElemType &e){               //返回某个元�
 	return e;
 }
 
-int LocateElem(LinkList L,ElemType e,int (*compare)(ElemType e,ElemType f)){            //定位
+int LocateElem(LinkList L, ElemType e, int (*compare)(ElemType e, ElemType f)){            //定位
 	int i = 0;
 	LinkList p;
 	p = L;
@@ -104,10 +104,10 @@ int LocateElem(LinkList L,ElemType e,int (*compare)(ElemType e,ElemType f)){    
 	return 0;
 }
 
-ElemType PriorElem(LinkList L,ElemType cur_e,ElemType &pre_e){               //前驱操作
-	LinkList p,q;
+ElemType PriorElem(LinkList L, ElemType cur_e, ElemType &pre_e){               //前驱操作
+	LinkList p, q;
 	p = L;
-	while(p->data != cur_e&&p != NULL){
+	while(p->data != cur_e && p != NULL){
 		q = p;
 		p = p->next ;
 	}
@@ -121,10 +121,10 @@ ElemType PriorElem(LinkList L,ElemType cur_e,ElemType &pre_e){               //�
 	}
 }
 
-ElemType NextElem(LinkList L,ElemType cur_e,ElemType &next_e){                  //后继操作
+ElemType NextElem(LinkList L, ElemType cur_e, ElemType &next_e){                  //后继操作
 	LinkList p,q;
 	p = q = L;
-	while(q->data != cur_e&&p != NULL){
+	while(q->data != cur_e && p != NULL){
 		q = p;
 		p = p->next ;
 	}
@@ -138,13 +138,13 @@ ElemType NextElem(LinkList L,ElemType cur_e,ElemType &next_e){                  
 	}
 }
 
-int ListInsert(LinkList &L,int i,ElemType e){                    //插入
+int ListInsert(LinkList &L, int i, ElemType e){                    //插入
 	if(i < 1||i > ListLength(L) + 1){
 		printf("插入序号有误\n");
 		return 0;
 	}
 	int j = 1;
-	LinkList p,q,r;
+	LinkList p, q, r;
 	p = q = L;
 	r = (LinkList )malloc(sizeof(LinkList));
 	r->data = e;
@@ -158,12 +158,12 @@ int ListInsert(LinkList &L,int i,ElemType e){                    //插入
 	return 1;
 }
 
-ElemType ListDelete(LinkList L,int i,ElemType e){             //删除
+ElemType ListDelete(LinkList L, int i, ElemType e){             //删除
 	if(i < 1||i > ListLength(L)){
 		printf("删除元素序号错误\n");
 		return 0;
 	}
-	LinkList p,q;
+	LinkList p, q;
 	p = L;
 	int j = 0;
 	while(j < i){
@@ -178,19 +178,19 @@ ElemType ListDelete(LinkList L,int i,ElemType e){             //删除
 	return e;
 }
 
-void ListTraverse(LinkList L,int (*visit)(LinkList L)){           //遍历
+void ListTraverse(LinkList L, int (*visit)(LinkList L)){           //遍历
 	if(visit(L) == 1) printf("遍历成功\n");
 	else printf("遍历失败\n");
 }
 
 int main()
 {
-	LinkList L,p,q;
+	LinkList L, p, q;
 	ElemType f = 0;
 	InitList(L);             //构造空表
 	int i;
 	p = L;
-	for(i = 1;i < 30;i++){
+	for(i = 1; i < 30; ++i){
 		q = (LinkList)malloc(sizeof(LinkList));
 		q->data = i;
 		q->next = NULL;
@@ -200,9 +200,9 @@ int main()
 	printf("是否为空：%d\n",ListEmpty(L));
 	printf("长度为：%d\n",ListLength(L));
 	printf("获取元素:%d\n", GetElem(L, 10, f));
-	printf("定位元素：%d\n",LocateElem(L,22,compare));
-	printf("前驱：%d\n",PriorElem(L,10,f));
-	printf("后继：%d\n",NextElem(L,10,f));
+	printf("定位元素：%d\n",LocateElem(L, 22, compare));
+	printf("前驱：%d\n",PriorElem(L, 10, f));
+	printf("后继：%d\n",NextElem(L, 10, f));
 	ListInsert(L,10,100);            
 	printf("删除：%d\n", ListDelete(L, 16, f));
 	ListTraverse(L,visit);            
