@@ -10,7 +10,7 @@ typedef struct shape
 	struct shape *next;
 }Link;
 
-Link *InitLink(Link *L,int N)              //形成菜单链表
+Link *InitLink(Link *L, int N)              //形成菜单链表
 {
 	L = (Link *)malloc(sizeof(Link));
 	L->next = NULL;
@@ -77,18 +77,18 @@ void Compare(Link *L,int x,int y)             //找出合适界面并输出正�
 int main()
 {
 	int j;
-	int N = 0,M = 0;
+	int N = 0, M = 0;
 	while(N<=0 || M<=0)
 	{
-		scanf("%d %d",&N,&M);
+		scanf("%d %d", &N, &M);
 		if(N<=0 || M<=0) printf("输入格式有误，重新输入\n");
 	}
 	Link *L = NULL;
 	L = InitLink(L,N);
 	int *a = (int *)malloc(M * sizeof(int));
 	int *b = (int *)malloc(M * sizeof(int));
-	for(j = 0;j < M;j++) scanf("%d %d",&a[j],&b[j]);
-	for(j = 0;j < M;j++) Compare(L,a[j],b[j]);
+	for(j = 0;j < M;j++) scanf("%d %d", &a[j], &b[j]);
+	for(j = 0;j < M;j++) Compare(L, a[j], b[j]);
 	DestroyLink(L);
 	system("pause");
 	return 0;
