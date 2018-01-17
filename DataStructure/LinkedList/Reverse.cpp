@@ -1,4 +1,4 @@
-//Visual Studio Express 2012 is recommended.
+//逆置单链表
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -54,10 +54,11 @@ int Show(LinkList L){
 }
 
 int main(){
-	LinkList L = 0;L = InitList(L);
+	LinkList L = 0;
+	L = InitList(L);
 	int i;
-	LinkList p,q = L;
-	for(i = 1;i < 41;i++){
+	LinkList p, q = L;
+	for(i = 1; i < 41; ++i){
 		p = (LinkList)malloc(sizeof(int));
 		p->data = i;
 		p->next = NULL;
