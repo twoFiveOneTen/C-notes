@@ -1,5 +1,4 @@
-//推荐使用VS 2012
-
+//合并两个正序顺序表为一个正序顺序表，忽略重复多余元素
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -34,7 +33,7 @@ int ShowList(Sqlist L){
 	return 0;
 }
 
-int ListInsert(Sqlist &L,int e){
+int ListInsert(Sqlist &L, int e){
 	int i;
 	for(i = L.length - 1;i >= 0;i--){
 		if(L.elem[i] > e){
@@ -50,7 +49,7 @@ int ListInsert(Sqlist &L,int e){
 
 int Judge(Sqlist A,int e){           //判断A中是否有元素e
 	int i;
-	for(i = 0;i < A.length;i++){
+	for(i = 0; i < A.length; ++i){
 		if(A.elem[i] == e) return 1;
 		else continue;
 	}
@@ -70,22 +69,22 @@ Sqlist MergeList(Sqlist &A,Sqlist B){             //合并
 }
 
 int main(){
-	Sqlist A,B,C;
+	Sqlist A, B, C;
 	int e;
 	Initlist(A);
 	int i;
-	for(i = 0;i < 20;i++){
+	for(i = 0; i < 20; ++i){
 		A.elem[i] = 5 * i;
 		++A.length;
 	}
 	Initlist(B);
-	for(i = 0;i < 20;i++){
+	for(i = 0; i < 20; ++i){
 		B.elem[i] = 3 * i;
 		++B.length;
 	}
 	ShowList(A);
 	ShowList(B);
-	C = MergeList(A,B);
+	C = MergeList(A, B);
 	ShowList(C);
 	system("pause");
 	return 0;
