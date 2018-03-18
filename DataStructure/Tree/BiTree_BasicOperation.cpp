@@ -34,14 +34,14 @@ int StackEmpty(Stack S)          //栈是否为空
 	else return 0;
 }
 
-void push(Stack &S,BiTree *p,int n)             //入栈
+void push(Stack &S, BiTree *p, int n)             //入栈
 {
 	S.top->ch = p;
 	if(n != -1) S.top->tag = n;
 	++S.top;
 }
 
-BiTree *pop(Stack &S,node &a)
+BiTree *pop(Stack &S, node &a)
 {
 	BiTree *p;
 	--S.top;
@@ -59,7 +59,7 @@ void DestroyStack(Stack S)
 
 void visit(BiTree *p)           //遍历的visit
 {
-	if(p != NULL) printf("%c",p->data);
+	if(p != NULL) printf("%c", p->data);
 }
 
 void InitBiTree(BiTree *T)            //初始化二叉树
@@ -149,12 +149,12 @@ void Assign(BiTree *T, BiTree *e, char value)           //赋值
 				DestroyStack(S);
 				return;
 			}
-			push(S,p,-1);
+			push(S, p, -1);
 			p = p->lchild;
 		}//endwhile
 		if(!StackEmpty(S))
 		{
-			p = pop(S,a);
+			p = pop(S, a);
 			p = p->rchild;
 		}//endif
 	}//endwhile
@@ -224,12 +224,12 @@ BiTree *RightChild(BiTree *T, BiTree *e)             //返回右孩子
 		while(p)
 		{
 			if(p == e) return p->rchild;
-			push(S,p,-1);
+			push(S, p, -1);
 			p = p->lchild;
 		}//endwhile
 		if(!StackEmpty(S))
 		{
-			p = pop(S,a);
+			p = pop(S, a);
 			p = p->rchild;
 		}//endif
 	}//endwhile
@@ -249,12 +249,12 @@ BiTree *LeftSibling(BiTree *T, BiTree *e)             //返回左兄弟
 		while(p)
 		{
 			if(p->rchild == e) return p->lchild;
-			push(S,p,-1);
+			push(S, p, -1);
 			p = p->lchild;
 		}//endwhile
 		if(!StackEmpty(S))
 		{
-			p = pop(S,a);
+			p = pop(S, a);
 			p = p->rchild;
 		}//endif
 	}//endwhile
@@ -278,7 +278,7 @@ BiTree *RightSibling(BiTree *T, BiTree *e)             //返回右兄弟
 		}//endwhile
 		if(!StackEmpty(S))
 		{
-			p = pop(S,a);
+			p = pop(S, a);
 			p = p->rchild;
 		}//endif
 	}//endwhile
@@ -320,12 +320,12 @@ void InsertChild(BiTree *T, BiTree *p, int LR, BiTree *c)         //插入孩子
 				}
 				return;
 			}
-			push(S,e,-1);
+			push(S, e, -1);
 			e = e->lchild;
 		}//endwhile
 		if(!StackEmpty(S))
 		{
-			e = pop(S,a);
+			e = pop(S, a);
 			e = e->rchild;
 		}//endif
 	}//endwhile
@@ -357,12 +357,12 @@ void DeleteChild(BiTree *T, BiTree *q, int LR)      //删除孩子
 				}
 				return;
 			}
-			push(S,p,-1);
+			push(S, p, -1);
 			p = p->lchild;
 		}//endwhile
 		if(!StackEmpty(S))
 		{
-			p = pop(S,a);
+			p = pop(S, a);
 			p = p->rchild;
 		}//endif
 	}//endwhile
@@ -374,8 +374,8 @@ void PreOrderTraverse(BiTree *T, void visit(BiTree *q))           //递归遍历
 	if(T)
 	{
 		visit(T);
-		PreOrderTraverse(T->lchild,visit);
-		PreOrderTraverse(T->rchild,visit);
+		PreOrderTraverse(T->lchild, visit);
+		PreOrderTraverse(T->rchild, visit);
 	}
 }
 
@@ -383,9 +383,9 @@ void InOrderTraverse(BiTree *T, void visit(BiTree *q))
 {
 	if(T)
 	{
-		InOrderTraverse(T->lchild,visit);
+		InOrderTraverse(T->lchild, visit);
 		visit(T);
-		InOrderTraverse(T->rchild,visit);
+		InOrderTraverse(T->rchild, visit);
 	}
 }
 
