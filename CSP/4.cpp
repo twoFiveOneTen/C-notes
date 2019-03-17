@@ -4,9 +4,9 @@ typedef struct data
 {
 	char act;
 	int dir;
-}code;
+}code;		//定义结构体code用于存放一个一组进程信息 
 
-int point[10000];
+int point[10000];		//point数组用于存放各个进程所应该执行的指令 
 int ta[10000];
 int re[666];
 	
@@ -69,6 +69,7 @@ int start(code data[10000][9], int n, int t)
 				return 0;
 			}
 		}
+		
 	}
 }
 
@@ -127,6 +128,7 @@ int main()
 		start(data, n, i);
 		init(data);
 	}
+	
 	for(i = 0; i < T-1; ++i) printf("%d\n", re[i]);
 	printf("%d", re[T-1]);
 	return 0;
