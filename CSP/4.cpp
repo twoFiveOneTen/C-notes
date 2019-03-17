@@ -69,7 +69,6 @@ int start(code data[10000][9], int n, int t)
 				return 0;
 			}
 		}
-		
 	}
 }
 
@@ -128,7 +127,6 @@ int main()
 		start(data, n, i);
 		init(data);
 	}
-	
 	for(i = 0; i < T-1; ++i) printf("%d\n", re[i]);
 	printf("%d", re[T-1]);
 	return 0;
