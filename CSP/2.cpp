@@ -23,8 +23,8 @@ int main()
 		switch(flag)
 		{
 			case 0:
-				if(ch[1] == '+') ch5[0] = ch[0] + ch[2] -48;
-				else ch5[0] = ch[0] - ch[2] -48;
+				if(ch[1] == '+') ch5[0] = ch[0] + ch[2] - 48;
+				else ch5[0] = ch[0] - ch[2] + 48;
   		 		for(k = 1; k < 5; ++k) ch5[k] = ch[2 + k];
 				break;
 			case 1:
