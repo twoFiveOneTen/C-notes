@@ -86,6 +86,5 @@ int main(){
 	ShowList(B);
 	C = MergeList(A, B);
 	ShowList(C);
-	system("pause");
 	return 0;
 }
