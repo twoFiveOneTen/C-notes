@@ -42,8 +42,8 @@ void CreateUDN(MGraph &G)        //创建无向网
 {
 	int i,j;
 	FILE* fp;
-	fp = fopen("data.txt","r");
-	fscanf(fp,"%d",&G.vexnum);
+	fp = fopen("data.txt", "r");
+	fscanf(fp, "%d", &G.vexnum);
 	++G.vexnum;
 	G.vexs[0].code = 0;
 	G.vexs[0].x = 0;
@@ -62,7 +62,7 @@ void CreateUDN(MGraph &G)        //创建无向网
 		fscanf(fp,"%d%d%d",&tag, &x, &y);
 		while(x + y == 0)
 		{
-			fscanf(fp,"%d%d%d",&tag, &x, &y);
+			fscanf(fp, "%d%d%d", &tag, &x, &y);
 		}
 	}
 	double temp;
@@ -103,17 +103,17 @@ void Show(MGraph G)
 
 void writeFile()
 {
-	FILE* fp;
-	fp = fopen("data.txt","w");
-	int i,l,m,j,k;
-	fprintf(fp,"%d\n",VERNUM);
+	FILE * fp;
+	fp = fopen("data.txt", "w");
+	int i, l, m, j, k;
+	fprintf(fp,"%d\n", VERNUM);
 	for(i = 0; i < VERNUM; ++i)
 	{
 		j = rand()%(MAPSIZE-2) + 2;
 		k = rand()%(MAPSIZE-3) + 3;
 		l = rand()%j;
 		m = rand()%k;
-		fprintf(fp,"%d %d %d\n",i + 1,l,m);
+		fprintf(fp, "%d %d %d\n", i + 1, l, m);
 	}
 	fclose(fp);
 	
@@ -219,13 +219,13 @@ void Route(MGraph &G)
 				return;
 			}
 			visited[k] = temp;
-			visited2[k] = MiniCost(G, temp, visited3,0);
+			visited2[k] = MiniCost(G, temp, visited3, 0);
 			lowcost = lowcost + G.arcs[visited[k]][visited2[k]].adj;
 			temp = visited2[k];
 			visited3[temp] = 1;
 			++k;
 			visited[k] = temp;
-			temp = MiniCost(G, temp, visited3,0);
+			temp = MiniCost(G, temp, visited3, 0);
 		}
 	}
 }
@@ -284,9 +284,9 @@ void ShortPath(MGraph G)
 		for(i = 0; i < G.vexnum; ++i)
 		{
 			if(v == i) continue;
-			if(p[v][i]) printf("%2d,",i);
+			if(p[v][i]) printf("%2d,", i);
 		}
-		printf("%2d\n",v);
+		printf("%2d\n", v);
 	}
 }
 
